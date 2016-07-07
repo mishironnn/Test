@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta chaeset="utf-8">
+  <title>Stop at 00:05!</title>
+  <style>
+  body {
+     background: #e0e0e0;
+     text-align: center;
+     font-size: 16px;
+     font-family: Arial,sans-serif;
+  }
+    #result{
+       font-weigh: bold;
+       font-size: 32px;
+       margin: 60px auto;
+       color: #00aaff;
+       text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+       }
+       
+      #btn{
+           margin: 0 auto;
+           width: 200px;
+           padding: 7px;
+           color: #fff;
+           border-radius: 5px;
+           background: #00aaff;
+           box-shadow: 0 4px 0 #0088cc;
+           cursor: pointer;
+           
+           }
+         #btn:hover {
+              opacity: 0.8;
+           }
+           
+           
+           
+           
+           
+  
+ </style>
+  </head>
+  <body>
+     <div id="result">Stop at 00:05!</div>
+     <div id="btn">START</div>
+
+  <script>
+      (function() {
+              'use strict';
+              var isStarted = false;
+              var startTime;
+              var diff;
+              var msg = 'stop at 00:05!';
+              
+              
+              var result = document.getElementById('result');
+              var btn = document.getElementById('btn');
+              
+              
+              
+              result.innerHTML = msg;
+              
+              
+              
+              btn.addEventListener('click',function() {
+                  if (!isStarted){
+                  //started
+                  isStarted = true;
+                  this.innerHTML = 'STOP';
+                  // get startTime
+                  startTime = Date.now();
+                  result.innerHTML = msg;
+                  }else{
+                  //stopped
+                  isStarted = false;
+                  this.innerHTML = 'START';
+                  // judge, show result
+                  diff = (Date.now() - startTime) / 1000-5;
+                  //console.log(diff);
+                  if (diff >= -0.1 && diff <= 0.1) {
+                      result.innerHTML = 'Perfect!';
+                  } else if (diff > 0) {
+                    result.innerHTML = 'You are' + diff.toFixed(2)
+                    +'seconds late';
+                    }else{
+                      result.innerHTML='You are' + Math.abs(diff).toFixed(2)
+                      +'seconds fast';
+                    }
+                    
+                  }
+                  
+              });
+              
+              
+         })();
+  </script>
+  </body>
+  </html>
